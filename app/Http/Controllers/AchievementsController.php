@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Achievement;
-use App\Models\AchievementType;
+use App\Interfaces\UserAchievementRepositoryInterface;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class AchievementsController extends Controller
 {
+    private UserAchievementRepositoryInterface $userAchievementRepository;
+
+    public function __construct(UserAchievementRepositoryInterface $userAchievementRepository)
+    {
+        $this->userAchievementRepository = $userAchievementRepository;
+    }
     public function index(User $user)
     {
         $unlocked_achievements = $user->achievements()->pluck('title')->toArray();
-        $next_available_achievements = $user->nextAvailableAchievements();
+        $next_available_achievements = $this->userAchievementRepository->nextAvailableAchievements($user);
 
         return response()->json([
             'unlocked_achievements' => $unlocked_achievements,

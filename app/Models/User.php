@@ -75,17 +75,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Achievement::class)->withTimestamps();
     }
 
-    /**
-     * The achievements user has yet to unlock
-     */
+
     public function nextAvailableAchievements(): array
     {
-        $achievement_types = AchievementType::all();
-        $next_available_achievements = [];
-        foreach($achievement_types as $type){
-            $next_available_achievements[] = Achievement::where('achievement_type_id', $type->id)->whereNotIn('id', $this->achievements()->pluck('id')->toArray())->first()->title;
-        }
-        return $next_available_achievements;
+
     }
 
 }
