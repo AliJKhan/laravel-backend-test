@@ -2,11 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\AchievementUnlocked;
 use App\Events\LessonWatched;
-use App\Models\Achievement;
 use App\Models\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class LessonWatchedListener
 {
@@ -44,45 +42,27 @@ class LessonWatchedListener
 
             switch (true) {
                 case $lessonCount === 1:
-                    $achievement = Achievement::where('title','First Lesson Watched')->first();
-                    if(!$this->checkIfAchievementUnlocked($achievement, $user))
-                        $user->achievements()->attach($achievement);
+                    event(new AchievementUnlocked('First Lesson Watched',$user));
                     break;
 
                 case $lessonCount === 5:
-                    $achievement = Achievement::where('title','5 Lessons Watched')->first();
-                    if(!$this->checkIfAchievementUnlocked($achievement, $user))
-                        $user->achievements()->attach($achievement);
+                    event(new AchievementUnlocked('5 Lessons Watched',$user));
                     break;
 
                 case $lessonCount === 10:
-                    $achievement = Achievement::where('title','10 Lessons Watched')->first();
-                    if(!$this->checkIfAchievementUnlocked($achievement, $user))
-                        $user->achievements()->attach($achievement);
+                    event(new AchievementUnlocked('10 Lessons Watched',$user));
                     break;
 
                 case $lessonCount === 25:
-                    $achievement = Achievement::where('title','25 Lessons Watched')->first();
-                    if(!$this->checkIfAchievementUnlocked($achievement, $user))
-                        $user->achievements()->attach($achievement);
+                    event(new AchievementUnlocked('20 Lessons Watched',$user));
                     break;
 
                 case $lessonCount === 50:
-                    $achievement = Achievement::where('title','50 Lessons Watched')->first();
-                    if(!$this->checkIfAchievementUnlocked($achievement, $user))
-                        $user->achievements()->attach($achievement);
+                    event(new AchievementUnlocked('50 Lessons Watched',$user));
                     break;
 
                 default:
                     echo "Your favorite color is neither red, blue, nor green!";
         }
-    }
-
-    /**
-     * Check if user has already unlocked achievement
-     */
-    private function checkIfAchievementUnlocked($achievement, User $user)
-    {
-        return $user->achievements()->where('achievement_id',$achievement->id)->first();
     }
 }
