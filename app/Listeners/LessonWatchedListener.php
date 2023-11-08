@@ -33,31 +33,31 @@ class LessonWatchedListener
 
     /**
      * @return void
-     * Check lessons watched and update achievements accordingly
-     * TODO: make event handler for achievements
+     * Check lessons watched count and update achievements accordingly
+     *
      */
     private function unlockAchievements(User $user): void
     {
-        $lessonCount = $user->watched()->count();
+        $lesson_count = $user->watched()->count();
 
             switch (true) {
-                case $lessonCount === 1:
+                case $lesson_count === 1:
                     event(new AchievementUnlocked('First Lesson Watched',$user));
                     break;
 
-                case $lessonCount === 5:
+                case $lesson_count === 5:
                     event(new AchievementUnlocked('5 Lessons Watched',$user));
                     break;
 
-                case $lessonCount === 10:
+                case $lesson_count === 10:
                     event(new AchievementUnlocked('10 Lessons Watched',$user));
                     break;
 
-                case $lessonCount === 25:
+                case $lesson_count === 25:
                     event(new AchievementUnlocked('20 Lessons Watched',$user));
                     break;
 
-                case $lessonCount === 50:
+                case $lesson_count === 50:
                     event(new AchievementUnlocked('50 Lessons Watched',$user));
                     break;
 

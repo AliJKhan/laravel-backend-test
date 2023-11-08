@@ -23,15 +23,8 @@ class AchievementUnlockedListener
     {
         $achievement = Achievement::where('title',$event->achievement_name)->first();
 
-        if(!$this->checkIfAchievementUnlocked($achievement, $event->user))
+        if(!$event->user->achievements()->where('achievement_id',$achievement->id)->first())
             $event->user->achievements()->attach($achievement);
     }
 
-    /**
-     * Check if user has already unlocked achievement
-     */
-    private function checkIfAchievementUnlocked($achievement, User $user)
-    {
-        return $user->achievements()->where('achievement_id',$achievement->id)->first();
-    }
 }
