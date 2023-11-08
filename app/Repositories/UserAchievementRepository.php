@@ -79,14 +79,16 @@ class UserAchievementRepository implements UserAchievementRepositoryInterface
     }
 
     /**
+     * @return array
      * The achievements user has yet to unlock
      */
     public function nextAvailableAchievements(User $user): array
     {
         $achievement_types = AchievementType::all();
+        $achievement_type_ids = $user->achievements()->pluck('id')->toArray();
         $next_available_achievements = [];
         foreach($achievement_types as $type){
-            $next_available_achievements[] = Achievement::where('achievement_type_id', $type->id)->whereNotIn('id', $user->achievements()->pluck('id')->toArray())->first()->title;
+            $next_available_achievements[] = (Achievement::where('achievement_type_id', $type->id)->whereNotIn('id',$achievement_type_ids )->first() ? Achievement::where('achievement_type_id', $type->id)->whereNotIn('id',$achievement_type_ids )->first()->title: '');
         }
         return $next_available_achievements;
     }

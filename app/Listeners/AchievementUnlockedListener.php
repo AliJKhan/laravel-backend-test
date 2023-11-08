@@ -25,6 +25,7 @@ class AchievementUnlockedListener
 
         if(!$event->user->achievements()->where('achievement_id',$achievement->id)->first())
             $event->user->achievements()->attach($achievement);
+
     }
 
 }

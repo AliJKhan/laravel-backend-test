@@ -75,11 +75,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Achievement::class)->withTimestamps();
     }
 
-
-    public function nextAvailableAchievements(): array
+    /**
+     * The badges user has unlocked
+     * Belongs To Many in case we want to show badge history later
+     */
+    public function badges()
     {
-
+        return $this->belongsToMany(Badge::class)->withTimestamps();
     }
-
 }
 
