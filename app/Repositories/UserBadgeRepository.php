@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Events\AchievementUnlocked;
 use App\Events\BadgeUnlocked;
 use App\Interfaces\UserBadgeRepositoryInterface;
 use App\Models\Badges\AdvancedBadge;
