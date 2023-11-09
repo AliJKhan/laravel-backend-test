@@ -38,7 +38,6 @@ class UserBadgeRepository implements UserBadgeRepositoryInterface
                 break;
 
             default:
-
         }
     }
 
@@ -64,7 +63,6 @@ class UserBadgeRepository implements UserBadgeRepositoryInterface
                 break;
 
             default:
-
            }
         return $remaining_to_unlock_next_badge;
 

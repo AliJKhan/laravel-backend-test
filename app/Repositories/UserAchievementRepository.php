@@ -39,7 +39,6 @@ class UserAchievementRepository implements UserAchievementRepositoryInterface
                 break;
 
             default:
-
         }
     }
 
@@ -72,7 +71,6 @@ class UserAchievementRepository implements UserAchievementRepositoryInterface
                 break;
 
             default:
-
         }
     }
 

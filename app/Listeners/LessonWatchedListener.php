@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\LessonWatched;
 use App\Interfaces\UserAchievementRepositoryInterface;
 use App\Interfaces\UserBadgeRepositoryInterface;
-
 class LessonWatchedListener
 {
 

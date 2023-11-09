@@ -18,6 +18,5 @@ class Badge extends Model
     public function next():mixed
     {
         return (Badge::where('id', '>', $this->id)->orderBy('id','asc')->first() ? Badge::where('id', '>', $this->id)->orderBy('id','asc')->first(): '') ;
-
     }
 }
